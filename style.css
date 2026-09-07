@@ -20,28 +20,19 @@
    1. DESIGN TOKENS
    ---------------------------------------------------------------- */
 :root {
-  /* ── Pink Theme Palette ─────────────────────────────────────── */
-  --dark:          hsl(330, 25%, 6%);
-  --dark-mid:      hsl(330, 22%, 10%);
-  --dark-surface:  hsl(330, 18%, 15%);
-
-  /* Primary accent — deep rose / hot pink */
-  --gold:          hsl(328, 75%, 62%);
-  --gold-light:    hsl(330, 85%, 78%);
-  --gold-glow:     hsla(328, 75%, 62%, 0.28);
-
-  /* Secondary accent — soft rose */
-  --blush:         hsl(345, 70%, 72%);
-  --blush-light:   hsl(345, 80%, 87%);
-  --blush-glow:    hsla(345, 70%, 72%, 0.22);
-
-  /* Text */
-  --cream:         hsl(340, 30%, 94%);
-  --cream-muted:   hsl(340, 15%, 68%);
-
-  /* Tertiary — soft lavender-pink complement */
-  --lavender:      hsl(300, 35%, 70%);
-  /* ─────────────────────────────────────────────────────────── */
+  /* Palette */
+  --dark:          hsl(330, 18%, 7%);
+  --dark-mid:      hsl(330, 15%, 11%);
+  --dark-surface:  hsl(330, 12%, 16%);
+  --gold:          hsl(42, 85%, 58%);
+  --gold-light:    hsl(44, 90%, 75%);
+  --gold-glow:     hsla(42, 85%, 58%, 0.22);
+  --blush:         hsl(340, 60%, 70%);
+  --blush-light:   hsl(340, 70%, 85%);
+  --blush-glow:    hsla(340, 60%, 70%, 0.18);
+  --cream:         hsl(38, 40%, 92%);
+  --cream-muted:   hsl(38, 20%, 70%);
+  --lavender:      hsl(270, 40%, 72%);
 
   /* Typography */
   --font-heading:     'Cormorant Garamond', Georgia, serif;
@@ -241,7 +232,7 @@ button:focus-visible {
   width: 100%;
   padding: 14px 18px;
   background: hsla(330, 12%, 20%, 0.9);
-  border: 1.5px solid hsla(328, 40%, 50%, 0.22);
+  border: 1.5px solid hsla(42, 40%, 40%, 0.25);
   border-radius: var(--radius-sm);
   color: var(--cream);
   font-family: var(--font-body);
@@ -256,7 +247,7 @@ button:focus-visible {
   box-shadow: 0 0 0 3px var(--gold-glow);
 }
 .gate-input::placeholder {
-  color: hsla(330, 20%, 65%, 0.5);
+  color: hsla(38, 20%, 60%, 0.5);
   letter-spacing: 0.02em;
 }
 
@@ -267,14 +258,14 @@ button:focus-visible {
   justify-content: center;
   gap: 8px;
   padding: 14px 24px;
-  background: linear-gradient(135deg, var(--gold), hsl(320, 70%, 48%));
-  color: hsl(330, 50%, 14%);
+  background: linear-gradient(135deg, var(--gold), hsl(35, 85%, 50%));
+  color: hsl(35, 45%, 15%);
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.95rem;
   letter-spacing: 0.04em;
   border-radius: var(--radius-sm);
-  box-shadow: 0 4px 24px hsla(328, 75%, 55%, 0.4);
+  box-shadow: 0 4px 24px hsla(42, 80%, 55%, 0.35);
   transition:
     transform var(--btn-transition),
     box-shadow var(--btn-transition),
@@ -282,7 +273,7 @@ button:focus-visible {
 }
 .gate-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px hsla(328, 75%, 55%, 0.55);
+  box-shadow: 0 8px 32px hsla(42, 80%, 55%, 0.5);
 }
 .gate-btn:active {
   transform: translateY(0) scale(0.97);
@@ -569,7 +560,7 @@ button:focus-visible {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: hsla(330, 35%, 75%, 0.28);
+  background: hsla(38, 40%, 80%, 0.3);
   transition: background 0.3s ease, transform 0.3s ease;
 }
 .reel-dot--active {
@@ -592,7 +583,7 @@ button:focus-visible {
   width: min(520px, 92vw);
   background: hsla(330, 15%, 13%, 0.9);
   backdrop-filter: blur(24px);
-  border: 1px solid hsla(328, 50%, 55%, 0.2);
+  border: 1px solid hsla(42, 50%, 50%, 0.15);
   border-radius: var(--radius-lg);
   padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3rem);
   text-align: center;
@@ -656,14 +647,14 @@ button:focus-visible {
 
 /* YES button */
 .ask-btn--yes {
-  background: linear-gradient(135deg, var(--gold), hsl(320, 70%, 48%));
-  color: hsl(330, 50%, 14%);
-  box-shadow: 0 4px 24px hsla(328, 75%, 55%, 0.45);
+  background: linear-gradient(135deg, var(--gold), hsl(35, 85%, 50%));
+  color: hsl(35, 45%, 15%);
+  box-shadow: 0 4px 24px hsla(42, 80%, 55%, 0.4);
   font-size: 1rem; /* grows via JS */
 }
 .ask-btn--yes:hover {
   transform: scale(1.08);
-  box-shadow: 0 8px 36px hsla(328, 75%, 55%, 0.65);
+  box-shadow: 0 8px 36px hsla(42, 80%, 55%, 0.6);
 }
 
 /* NO button */

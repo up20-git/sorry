@@ -655,9 +655,9 @@ function launchConfetti() {
 
   const COUNT = 180;
   const COLORS = [
-    '#f4a9c8', '#e87bac', '#ff8fab', '#f9b8d4',  // hot pinks
-    '#c96ea8', '#e8a0c0', '#ffb3cb', '#d46a9f',  // deep rose
-    '#f0c0dc', '#f8d7e8', '#ffffff', '#fce4ec',  // soft blush / white
+    '#f9d77e', '#f4a9c8', '#c9a8e0', '#a0d9c0',
+    '#f7c59f', '#e8c6f0', '#fde8c8', '#aadcf5',
+    '#ffd700', '#ff8fab', '#b8f2e6',
   ];
 
   let particles = Array.from({ length: COUNT }, () => ({
@@ -779,8 +779,8 @@ function launchConfetti() {
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
 
-      // Alternating hot-pink / soft rose tones
-      const hue = (s.x / W > 0.5) ? '328, 80%, 72%' : '345, 70%, 75%';
+      // Alternating warm gold / blush tones
+      const hue = (s.x / W > 0.5) ? '42, 80%, 70%' : '340, 60%, 75%';
       ctx.fillStyle = `hsla(${hue}, ${a})`;
       ctx.fill();
     });
