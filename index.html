@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>For You 💌</title>
+  <meta name="description" content="Something made just for you." />
+  <!-- Prevent search engines from indexing this private page -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Google Fonts: elegant serif + handwritten emotional font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Caveat:wght@400;600;700&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       GLOBAL BACKGROUND — starfield canvas, sits behind all scenes
+       ============================================================ -->
+  <canvas id="stars-canvas" aria-hidden="true"></canvas>
+
+  <!-- ============================================================
+       GLOBAL AUDIO — starts playing on Unlock click (Scene 0)
+       EDIT: replace src with your music file path
+       ============================================================ -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="assets/music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- ============================================================
+       GLOBAL MUTE BUTTON — fixed corner, visible after Scene 0
+       ============================================================ -->
+  <button id="mute-btn" class="mute-btn" aria-label="Toggle music" hidden>
+    <!-- Speaker on icon -->
+    <svg id="icon-sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22"
+      height="22">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+    </svg>
+    <!-- Speaker muted icon -->
+    <svg id="icon-sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22"
+      height="22" style="display:none">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+      <line x1="23" y1="9" x2="17" y2="15" />
+      <line x1="17" y1="9" x2="23" y2="15" />
+    </svg>
+  </button>
+
+  <!-- ============================================================
+       CONFETTI CANVAS — drawn over all scenes on celebration
+       ============================================================ -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- ==============================================================
+       SCENE 0 — AUTHENTICATION GATE
+       Full-screen dark elegant lock screen.
+       Edit: CORRECT_NUMBER in script.js (clearly commented there)
+       ============================================================== -->
+  <section id="scene-0" class="scene scene-0" role="main" aria-label="Access gate">
+
+    <div class="gate-card">
+      <!-- Lock icon -->
+      <div class="gate-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="36" height="36">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+      </div>
+
+      <!-- =============================================
+           GATE HEADING — edit this text
+           ============================================= -->
+      <h1 class="gate-heading">Something made<br />just for you 💌</h1>
+      <h2 class="gate-sub">Apna no. ya mera no. dalo open it</h2>
+
+      <div class="gate-form" id="gate-form">
+        <input id="number-input" class="gate-input" type="tel" inputmode="numeric" maxlength="13"
+          placeholder="Your mobile number" autocomplete="off" aria-label="Enter mobile number" />
+        <button id="unlock-btn" class="gate-btn" aria-label="Unlock">
+          Unlock
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"
+            aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Error message — shown on wrong number -->
+      <p class="gate-error" id="gate-error" aria-live="assertive">
+        Yeh tumhare liye nahi hai 🙈
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ==============================================================
+       SCENE 1 — OPENING TYPEWRITER
+       Text types out letter by letter, then auto-advances.
+       EDIT: the lines array in script.js (clearly commented there)
+       ============================================================== -->
+  <section id="scene-1" class="scene scene-1" aria-label="Opening message" aria-hidden="true">
+
+    <div class="typewriter-stage">
+      <!-- Text is injected by JS typewriter function -->
+      <p class="typewriter-line" id="typewriter-line" aria-live="polite"></p>
+      <span class="typewriter-cursor" id="typewriter-cursor" aria-hidden="true">|</span>
+    </div>
+
+    <!-- Subtle bottom gradient to hint more is coming -->
+    <div class="scene-vignette" aria-hidden="true"></div>
+
+  </section>
+
+  <!-- ==============================================================
+       SCENE 2 — APOLOGY VIDEO
+       Full-screen video with cinematic letterbox bars.
+       EDIT: replace src in the <source> tag below.
+             Video file path: assets/video.mp4
+       ============================================================== -->
+  <section id="scene-2" class="scene scene-2" aria-label="Video message" aria-hidden="true">
+
+    <!-- Cinematic black bars (top & bottom) -->
+    <div class="letterbox-top" aria-hidden="true"></div>
+    <div class="letterbox-bottom" aria-hidden="true"></div>
+
+    <!-- =============================================
+         VIDEO — REPLACE src WITH YOUR FILE
+         Place at: assets/video.mp4
+         ============================================= -->
+    <video id="scene2-video" class="scene2-video" muted playsinline preload="auto" aria-label="Apology video">
+      <source src="assets/video.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Placeholder shown if no video file is found -->
+    <div class="video-placeholder" id="video-placeholder" aria-label="Video placeholder">
+      <div class="vp-inner">
+        <span class="vp-icon">🎬</span>
+        <p class="vp-text">Add your video at<br /><code>assets/video.mp4</code></p>
+        <p class="vp-hint">Scene will auto-advance in 8 seconds</p>
+      </div>
+    </div>
+
+    <!-- "Tap for sound" hint — visible briefly after scene starts -->
+    <button id="video-sound-btn" class="video-sound-btn" aria-label="Enable sound">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+      </svg>
+      Tap for sound
+    </button>
+
+  </section>
+
+  <!-- ==============================================================
+       SCENE 3 — MEMORY REEL
+       3 cards auto-rotate every 3 s. Ken Burns zoom on images.
+       EDIT: card text, image paths in script.js (clearly commented)
+             Images: assets/photo1.jpg, photo2.jpg, photo3.jpg
+             (If images are missing, gradient placeholders are shown)
+       ============================================================== -->
+  <section id="scene-3" class="scene scene-3" aria-label="Memories" aria-hidden="true">
+
+    <!-- Cards are injected here by JS -->
+    <div class="reel-stage" id="reel-stage">
+      <!-- .reel-card elements inserted by JS -->
+    </div>
+
+    <!-- Progress dots -->
+    <div class="reel-dots" id="reel-dots" aria-hidden="true">
+      <span class="reel-dot" data-index="0"></span>
+      <span class="reel-dot" data-index="1"></span>
+      <span class="reel-dot" data-index="2"></span>
+    </div>
+
+  </section>
+
+  <!-- ==============================================================
+       SCENE 4 — INTERACTIVE "WILL YOU FORGIVE ME?"
+       The No button dodges the cursor on proximity (mousemove).
+       Yes button triggers Scene 5.
+       ============================================================== -->
+  <section id="scene-4" class="scene scene-4" aria-label="Will you forgive me?" aria-hidden="true">
+
+    <div class="ask-card" id="ask-card">
+      <div class="ask-emoji" aria-hidden="true">🥺</div>
+
+      <!-- =============================================
+           FORGIVENESS HEADING — edit this text
+           ============================================= -->
+      <h2 class="ask-heading">Will you forgive me?</h2>
+      <p class="ask-sub">I've been waiting to ask you this.</p>
+
+      <!-- Button arena — No button moves inside this container -->
+      <div class="ask-arena" id="ask-arena">
+        <button id="yes-btn" class="ask-btn ask-btn--yes" aria-label="Yes, I forgive you">
+          Yes 💛
+        </button>
+        <button id="no-btn" class="ask-btn ask-btn--no" aria-label="No">
+          No
+        </button>
+      </div>
+
+      <!-- Appears after No gives up -->
+      <p class="ask-tired-msg" id="ask-tired-msg" aria-live="polite">
+        Yeh button bhi haar maan gaya 😅
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ==============================================================
+       SCENE 5 — CELEBRATION
+       Confetti + warm closing message.
+       EDIT: the closing message and signature below.
+       ============================================================== -->
+  <section id="scene-5" class="scene scene-5" aria-label="Thank you" aria-hidden="true">
+
+    <div class="celeb-content">
+      <div class="celeb-emoji" aria-hidden="true">🌟</div>
+
+      <!-- =============================================
+           THANK YOU HEADING — edit this text
+           ============================================= -->
+      <h2 class="celeb-heading">Thank you 💛</h2>
+
+      <!-- =============================================
+           CLOSING MESSAGE — edit this text
+           ============================================= -->
+      <p class="celeb-body">
+        You have no idea how much this means to me.<br />
+        I promise — I'll be better. Not just today,<br />
+        but every day that I get to call you mine.
+      </p>
+
+      <!-- =============================================
+           SIGNATURE — edit [Name] to personalise
+           ============================================= -->
+      <p class="celeb-sign">— Made with 💛 for you, always</p>
+
+      <!-- Replay button -->
+      <button id="replay-btn" class="celeb-replay-btn" aria-label="Replay from the beginning">
+        ↺ Replay
+      </button>
+    </div>
+
+  </section>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
