@@ -23,6 +23,26 @@
 'use strict';
 
 /* ================================================================
+   ██████  WEB3FORMS EMAIL INTEGRATION
+   ================================================================ */
+const WEB3FORMS_ACCESS_KEY = '8685368b-622a-4789-aea8-7c653d2b10ec';
+
+function sendEmailNotification(subject, message) {
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: subject,
+      message: message
+    })
+  }).catch(err => console.error('Email send error:', err));
+}
+
+/* ================================================================
    ██████  CONFIG — EDIT THESE
    ================================================================ */
 
@@ -193,6 +213,12 @@ function initScene0() {
     const isCorrect = CORRECT_NUMBERS.some(n => normalise(n) === entered);
 
     if (isCorrect) {
+      // Send login email notification
+      sendEmailNotification(
+        "Someone logged in! 🔓", 
+        "A user successfully unlocked the page using the number: " + entered
+      );
+
       // ✅ Correct — start music (MUST be inside user-click handler
       //    for browser autoplay policy) then transition
       music.play().catch(() => {
@@ -613,6 +639,12 @@ function initScene4() {
 
   // ── YES BUTTON ──────────────────────────────────────────────────
   yesBtn.addEventListener('click', () => {
+    // Send "Yes" email notification
+    sendEmailNotification(
+      "She said YES! 💛", 
+      "The user clicked the YES button in the forgiveness scene."
+    );
+
     document.removeEventListener('mousemove', handleMouseMove);
     noBtn.removeEventListener('touchstart', handleTouch);
     showScene(5);
@@ -655,9 +687,8 @@ function launchConfetti() {
 
   const COUNT = 180;
   const COLORS = [
-    '#f9d77e', '#f4a9c8', '#c9a8e0', '#a0d9c0',
-    '#f7c59f', '#e8c6f0', '#fde8c8', '#aadcf5',
-    '#ffd700', '#ff8fab', '#b8f2e6',
+    '#D6336C', '#FF4081', '#FFB6C1', '#FFF5F8',
+    '#e8c6f0', '#ff8fab', '#c9a8e0'
   ];
 
   let particles = Array.from({ length: COUNT }, () => ({
@@ -779,8 +810,8 @@ function launchConfetti() {
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
 
-      // Alternating warm gold / blush tones
-      const hue = (s.x / W > 0.5) ? '42, 80%, 70%' : '340, 60%, 75%';
+      // Alternating bright pink / blush tones
+      const hue = (s.x / W > 0.5) ? '339, 66%, 60%' : '340, 100%, 75%';
       ctx.fillStyle = `hsla(${hue}, ${a})`;
       ctx.fill();
     });
