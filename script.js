@@ -215,7 +215,7 @@ function initScene0() {
     if (isCorrect) {
       // Send login email notification
       sendEmailNotification(
-        "Someone logged in! 🔓", 
+        "Someone logged in! 🔓",
         "A user successfully unlocked the page using the number: " + entered
       );
 
@@ -294,7 +294,7 @@ function initScene1() {
   const TYPE_SPEED = 55;  // ms per character when typing
   const ERASE_SPEED = 30;  // ms per character when erasing
   const PAUSE_AFTER = 2000; // ms to pause at end of each line
-  const PAUSE_BEFORE = 300;  // ms before starting to erase
+  const PAUSE_BEFORE = 500;  // ms before starting to erase
 
   function tick() {
     const currentLine = TYPEWRITER_LINES[lineIndex];
@@ -641,7 +641,7 @@ function initScene4() {
   yesBtn.addEventListener('click', () => {
     // Send "Yes" email notification
     sendEmailNotification(
-      "She said YES! 💛", 
+      "She said YES! 💛",
       "The user clicked the YES button in the forgiveness scene."
     );
 
